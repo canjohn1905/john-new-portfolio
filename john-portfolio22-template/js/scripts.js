@@ -1,11 +1,4 @@
-/*!
-* Start Bootstrap - Agency v7.0.10 (https://startbootstrap.com/theme/agency)
-* Copyright 2013-2021 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE)
-*/
-//
-// Scripts
-// 
+ 
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -52,3 +45,27 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+window.addEventListener('mousemove', handleMouseMove);
+window.addEventListener('resize', handleWindowResize);
+
+const spansSlow = document.querySelectorAll('.spanSlow');
+const spansFast = document.querySelectorAll('.spanFast');
+
+let width = window.innerWidth;
+
+function handleMouseMove(e) {
+  let normalizedPosition = e.pageX / (width/2) - 1;
+  let speedSlow = 100 * normalizedPosition;
+  let speedFast = 200 * normalizedPosition;
+  spansSlow.forEach((span) => {
+    span.style.transform = `translate(${speedSlow}px)`;
+  });
+  spansFast.forEach((span) => {
+    span.style.transform = `translate(${speedFast}px)`
+  })
+}
+//we need to recalculate width when the window is resized
+function handleWindowResize() {
+  width = window.innerWidth;
+}
